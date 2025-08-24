@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Prediction ML</title>
+    <meta name="description" content="Educational machine learning project demonstrating cancer risk prediction using Random Forest algorithms" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+
+    <header class="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-gray-900">Cancer Prediction ML</span>
+                </div>
+                <span class="px-2 py-1 text-xs border border-gray-200 rounded-full bg-white text-gray-600">
+                    Educational Project
+                </span>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex justify-center mb-6">
+                <div class="p-4 bg-blue-100 rounded-full">
+                    <svg class="h-16 w-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Cancer Prediction Using
+                <span class="text-blue-600 block">Machine Learning</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                this is cancer prediction project in python. I made it to raise awaireness for cancer because I lost a relative to this stupid disease. It uses machine learning (random forest classifier) and a public kaggle dataset. Users just enter some medical data and history, and they get a diagnosis (chance they have cancer)
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+               <button 
+    onclick="window.location.href='/start'" 
+    class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">
+    Try Now
+</button>
+                <button onclick="window.open('https://github.com/jimmydin7/cancer-prediction-hackathon')"class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-blue-600 bg-white border border-blue-600 rounded-md hover:bg-blue-50 transition-colors">
+                    View on Github
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                   a random forest model analyzes multiple patient factors to assess cancer risk probability
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="mx-auto p-3 bg-green-100 rounded-full w-fit mb-4">
+                        <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Data Collection</h3>
+                    <p class="text-gray-600">
+                        Patient data including demographics, lifestyle factors, and medical history is collected and preprocessed
+                    </p>
+                </div>
+
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="mx-auto p-3 bg-blue-100 rounded-full w-fit mb-4">
+                        <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Model Training</h3>
+                    <p class="text-gray-600">
+                        Random Forest algorithm trains on 80% of the data, building multiple decision trees for robust predictions
+                    </p>
+                </div>
+
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="mx-auto p-3 bg-purple-100 rounded-full w-fit mb-4">
+                        <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Risk Assessment</h3>
+                    <p class="text-gray-600">
+                        The model outputs probability scores indicating cancer risk levels based on input patient features
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Patient Features Analyzed</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The model considers eight key factors from the cancer_db.csv dataset
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Age</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Patient age demographic</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Gender</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Biological sex factor</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">BMI</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Body Mass Index measurement</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Smoking</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Smoking status and history</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Genetic Risk</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Hereditary predisposition factors</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Physical Activity</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Exercise and lifestyle patterns</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Alcohol Intake</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Consumption frequency and amount</p>
+                </div>
+
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Cancer History</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Previous cancer diagnosis record</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Technical Specifications</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Built with Python, scikit-learn, and pandas for reliable machine learning analysis
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-2">80/20</h3>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Training Split</h4>
+                    <p class="text-sm text-gray-600">Training to test data ratio</p>
+                </div>
+
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-2">Random Forest</h3>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Algorithm</h4>
+                    <p class="text-sm text-gray-600">Ensemble learning method</p>
+                </div>
+
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-2">42</h3>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Random State</h4>
+                    <p class="text-sm text-gray-600">Reproducibility seed</p>
+                </div>
+
+                <div class="text-center p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-2">8</h3>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Features</h4>
+                    <p class="text-sm text-gray-600">Input parameters analyzed</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Why Random Forest?</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Advantages</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Excellent balance of accuracy and interpretability</li>
+                            <li>• Handles mixed data types effectively</li>
+                            <li>• Reduces overfitting through ensemble averaging</li>
+                            <li>• Provides feature importance rankings</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Implementation</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Built with scikit-learn RandomForestClassifier</li>
+                            <li>• Uses train_test_split for data validation</li>
+                            <li>• Returns probability scores via predict_proba</li>
+                            <li>• Reproducible results with random_state=42</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 px-4 bg-red-50">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <div class="flex justify-center mb-4">
+                    <svg class="h-12 w-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Important Limitations</h2>
+                <p class="text-xl text-red-700 max-w-3xl mx-auto font-semibold">
+                    This project is for educational and research purposes only
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-white border border-red-200 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-red-800 mb-4">Not for Clinical Use</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <p>• This model is not validated for medical diagnosis</p>
+                        <p>• Results should never replace professional medical advice</p>
+                        <p>• Always consult healthcare professionals for medical concerns</p>
+                        <p>• The model is designed for educational demonstration only</p>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white border border-red-200 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-red-800 mb-4">Technical Limitations</h3>
+                    <div class="space-y-3 text-gray-700">
+                        <p>• Basic preprocessing without advanced feature engineering</p>
+                        <p>• No hyperparameter tuning or cross-validation implemented</p>
+                        <p>• Limited dataset size and scope</p>
+                        <p>• Results are for prototyping and learning purposes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <footer class="py-12 px-4 bg-gray-900 text-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-2 mb-4">
+                    <span class="text-lg font-semibold">Built with ❤️ by Jim</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
