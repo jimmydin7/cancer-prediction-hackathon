@@ -80,11 +80,13 @@ def summary():
     if probability is not None:
         if probability >= 80:
             color = 'red-600'
+            result = f"High risk: {probability:.2f}% chance of cancer."
         elif probability >= 50:
             color = 'orange-400'
+            result = f"Medium risk: {probability:.2f}% chance of cancer."
         else:
             color = 'green-600'
-        result = f"High risk: {probability:.2f}% chance of cancer."
+            result = f"Low risk: {probability:.2f}% chance of cancer."
     else:
         color = 'green-600'
         result = "Low risk: Model predicts no cancer."
