@@ -118,6 +118,51 @@
           {% endif %}
         </div>
 
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+            </svg>
+            Risk Comparison Chart
+          </h3>
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800">Your Risk vs. Age Group Average</h4>
+                <p class="text-sm text-gray-600">Age group: {{ age_group }} years</p>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-gray-700">Your Prediction:</span>
+                <div class="flex items-center space-x-2">
+                  <div class="w-32 bg-gray-200 rounded-full h-3">
+                    <div class="bg-blue-600 h-3 rounded-full" style="width: {{ [user_probability, 100] | min }}%"></div>
+                  </div>
+                  <span class="text-sm font-semibold text-blue-600 w-16 text-right">{{ "%.1f"|format(user_probability) }}%</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-gray-700">Age Group Average:</span>
+                <div class="flex items-center space-x-2">
+                  <div class="w-32 bg-gray-200 rounded-full h-3">
+                    <div class="bg-gray-500 h-3 rounded-full" style="width: {{ [avg_probability, 100] | min }}%"></div>
+                  </div>
+                  <span class="text-sm font-semibold text-gray-600 w-16 text-right">{{ "%.1f"|format(avg_probability) }}%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-500">0%</span>
+                <span class="text-gray-500">25%</span>
+                <span class="text-gray-500">50%</span>
+                <span class="text-gray-500">75%</span>
+                <span class="text-gray-500">100%</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="mb-8">
           <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">

@@ -77,6 +77,14 @@ def summary():
     df = pd.DataFrame([ordered_input])
     probability = cancer_model.predict(df)
 
+    age = model_input['Age']
+    age_group_start = (age // 10) * 10
+    age_group_end = age_group_start + 9
+    
+    cancer_data = pd.read_csv('cancer_db.csv')
+    age_group_data = cancer_data[(cancer_data['Age'] >= age_group_start) & (cancer_data['Age'] <= age_group_end)]
+    avg_probability = age_group_data['Diagnosis'].mean() * 100 if len(age_group_data) > 0 else 0
+
     if probability is not None:
         if probability >= 80:
             color = 'red-600'
@@ -90,7 +98,14 @@ def summary():
     else:
         color = 'green-600'
         result = "Low risk: Model predicts no cancer."
-    return render_template('summary.html', answers=answers, result=result, color=color)
+    
+    return render_template('summary.html', 
+                         answers=answers, 
+                         result=result, 
+                         color=color, 
+                         user_probability=probability if probability is not None else 0,
+                         avg_probability=avg_probability,
+                         age_group=f"{age_group_start}-{age_group_end}")
 
 if __name__ == '__main__':
     app.run(debug=True)
