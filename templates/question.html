@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>Question {{ qid + 1 }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+    <h3 class="text-2xl font-semibold mb-6 text-gray-800">{{ question.label if question.label else question.name }}</h3>
+    
+    <form method="post" id="question-form" class="space-y-6">
+      {% if question.type == 'select' %}
+        <select name="answer" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+          {% for option in question.options %}
+            <option value="{{ loop.index0 }}">{{ option }}</option>
+          {% endfor %}
+        </select>
+
+      {% elif question.type == 'scale' %}
+        <input type="hidden" name="answer" id="scale-value" required>
+        <div class="flex flex-wrap gap-3 justify-center">
+          {% for i in range(1, 11) %}
+            <div class="scale-box w-12 h-12 flex items-center justify-center rounded-md bg-gray-200 text-gray-700 font-bold cursor-pointer hover:bg-gray-300 transition"
+                 data-value="{{ i }}">
+              {{ i }}
+            </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        <input type="{{ question.type }}" name="answer" required autofocus
+               class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      {% endif %}
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition">Next</button>
+    </form>
+  </div>
+
+  <script src="static\js\question.js"></script>
+</body>
+</html>
